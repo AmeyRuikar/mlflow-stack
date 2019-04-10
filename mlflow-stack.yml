@@ -22,7 +22,12 @@ services:
       - mlflow
       - minio
   mlflow:
-    image: mlflow-medium:0.8.2
+    image: mlflow:0.8.2
+    environment:
+      - MLFLOW_STATIC_PREFIX=/mlflow
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000/
+      - AWS_ACCESS_KEY_ID=minioKey
+      - AWS_SECRET_ACCESS_KEY=minioSecret
     deploy:
       replicas: 1
       resources:
